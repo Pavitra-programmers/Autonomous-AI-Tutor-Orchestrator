@@ -1,0 +1,5 @@
+{"text": "I'm struggling with derivatives in calculus and want practice problems", "intent": "quiz_generator", "expected_params": {"topic": "derivatives", "subject": "calculus", "difficulty": "beginner", "question_type": "practice", "num_questions": 5}}
+{"text": "Make 5 flashcards on photosynthesis for biology", "intent": "flashcard_generator", "expected_params": {"topic": "photosynthesis", "subject": "biology", "count": 5, "difficulty": "medium"}}
+{"text": "Explain quantum mechanics simply - I'm confused", "intent": "concept_explainer", "expected_params": {"concept": "quantum mechanics", "subject": "physics", "style": "simple", "difficulty": "beginner"}}
+{"text": "I need comprehensive notes on thermodynamics in physics", "intent": "note_maker", "expected_params": {"topic": "thermodynamics", "subject": "physics", "style": "comprehensive", "difficulty": "medium"}}
+{"text": "Can you give me a quiz on algebra?", "intent": "quiz_generator", "expected_params": {"topic": "algebra", "subject": "math", "difficulty": "medium", "question_type": "practice", "num_questions": 5}}
