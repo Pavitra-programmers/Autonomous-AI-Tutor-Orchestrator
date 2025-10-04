@@ -1,17 +1,17 @@
-"""Configuration settings."""
+"""Configuration settings for the orchestrator."""
 
 import os
 
 # API Keys
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# Model Settings
+# Intent detection model settings
 INTENT_MODEL = "facebook/bart-large-mnli"
 INTENT_THRESHOLD = 0.5
 
-# Tool Settings
+# Default tool settings
 DEFAULT_QUIZ_QUESTIONS = 5
 DEFAULT_FLASHCARD_COUNT = 5
 
-# State Management
+# File paths
 STATE_FILE = "data/student_states.json"

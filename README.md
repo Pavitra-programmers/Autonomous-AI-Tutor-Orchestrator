@@ -1,63 +1,84 @@
 # AI Tutor Orchestrator
 
-A lightweight, high-accuracy orchestrator for educational AI tools.
+A simple orchestrator that routes student requests to appropriate educational tools. Built for hackathon demonstration.
 
-## Quick Start
+## Getting Started
 
-1. **Install dependencies**
+First, install the required packages:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **Run the demo**
+Then run the demo to see it in action:
+
 ```bash
 python demo.py
 ```
 
-3. **Run the server**
+To start the API server:
+
 ```bash
 python -m app.main
 ```
 
-4. **Test the API**
+The server will be available at http://localhost:8000. You can test it with:
+
 ```bash
 curl -X POST "http://localhost:8000/orchestrate/message" \
      -H "Content-Type: application/json" \
      -d '{"user_id": "test", "text": "I want practice problems on derivatives"}'
 ```
 
+## How It Works
+
+The orchestrator takes a student's message and:
+
+1. Detects what type of help they need (quiz, flashcards, notes, or explanation)
+2. Extracts relevant parameters like topic and subject
+3. Validates the parameters
+4. Calls the appropriate tool to generate content
+
 ## Project Structure
 
 ```
 orchestrator/
 ├─ app/
-│  ├─ main.py                 # FastAPI app + endpoints
-│  ├─ orchestrator.py         # core orchestration flow
-│  ├─ intent.py               # intent detection module
-│  ├─ extractor.py            # parameter extraction (LLM + parser)
-│  ├─ validator.py            # schema validation helpers
-│  ├─ tools/
+│  ├─ main.py                 # FastAPI endpoints
+│  ├─ orchestrator.py         # main orchestration logic
+│  ├─ intent.py               # detects user intent
+│  ├─ extractor.py            # extracts parameters from text
+│  ├─ validator.py            # validates extracted parameters
+│  ├─ tools/                  # tool adapters
 │  │   ├─ note_maker.py
 │  │   ├─ flashcard.py
-│  │   └─ concept_explainer.py
-│  ├─ state.py                # state manager (JSON-based)
-│  └─ config.py
+│  │   ├─ concept_explainer.py
+│  │   └─ quiz_generator.py
+│  ├─ state.py                # manages student state
+│  └─ config.py               # configuration settings
 ├─ tests/
 │  └─ test_extraction.py
 ├─ data/
-│  └─ examples.jsonl          # sample utterances + gold params
+│  └─ examples.jsonl
 └─ README.md
 ```
 
-## API Endpoints
+## Supported Tools
 
-- `POST /orchestrate/message` - Main orchestration endpoint
-- `GET /health` - Health check
+The orchestrator can route to four different tools:
 
-## Demo
+- **Quiz Generator**: Creates practice questions and quizzes
+- **Flashcard Generator**: Generates study flashcards  
+- **Note Maker**: Creates study notes and summaries
+- **Concept Explainer**: Provides explanations of concepts
 
-The orchestrator handles these intents:
-- **quiz_generator**: "I want practice problems on derivatives"
-- **flashcard_generator**: "Make flashcards on photosynthesis"  
-- **note_maker**: "I need notes on thermodynamics"
-- **concept_explainer**: "Explain quantum mechanics simply"
+## Example Usage
+
+Try these sample requests:
+
+- "I want practice problems on derivatives in calculus"
+- "Make 5 flashcards on photosynthesis for biology"
+- "Explain quantum mechanics simply"
+- "I need comprehensive notes on thermodynamics"
+
+The orchestrator will detect the intent, extract parameters, and generate appropriate content.

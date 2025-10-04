@@ -1,12 +1,12 @@
-"""Simple demo script."""
+"""Simple demo script for the AI Tutor Orchestrator."""
 
 import asyncio
 import json
 from app.orchestrator import orchestrate
 
 async def demo():
-    """Run demo scenarios."""
-    print("🚀 AI Tutor Orchestrator Demo")
+    """Run demo scenarios to showcase the orchestrator."""
+    print("AI Tutor Orchestrator Demo")
     print("=" * 50)
     
     scenarios = [
@@ -17,15 +17,15 @@ async def demo():
     ]
     
     for i, text in enumerate(scenarios, 1):
-        print(f"\n📝 Scenario {i}: {text}")
+        print(f"\nScenario {i}: {text}")
         print("-" * 50)
         
         try:
             result = await orchestrate("demo_user", text)
-            print(f"✅ Result:")
+            print("Result:")
             print(json.dumps(result, indent=2))
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
         
         print()
 

@@ -1,9 +1,13 @@
 """Flashcard tool adapter."""
 
 async def call_flashcard_tool(params: dict):
-    # for demo, build flashcards from topic
+    """
+    Generate flashcards based on extracted parameters.
+    Creates mock flashcards for demo purposes.
+    """
     topic = params["topic"]
     count = params.get("count", 5)
+    
     return {
         "topic": topic,
         "flashcards": [

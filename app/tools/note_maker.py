@@ -1,10 +1,14 @@
 """Note maker tool adapter."""
 
 async def call_note_tool(params: dict):
-    # for demo, create notes from topic
+    """
+    Generate study notes based on extracted parameters.
+    Creates mock notes for demo purposes.
+    """
     topic = params["topic"]
     subject = params["subject"]
     style = params.get("style", "comprehensive")
+    
     return {
         "topic": topic,
         "subject": subject,

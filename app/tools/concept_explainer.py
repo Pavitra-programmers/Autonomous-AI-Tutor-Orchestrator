@@ -1,10 +1,14 @@
 """Concept explainer tool adapter."""
 
 async def call_concept_tool(params: dict):
-    # for demo, explain concept
+    """
+    Generate concept explanations based on extracted parameters.
+    Creates mock explanations for demo purposes.
+    """
     concept = params["concept"]
     subject = params["subject"]
     style = params.get("style", "simple")
+    
     return {
         "concept": concept,
         "subject": subject,

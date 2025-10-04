@@ -1,10 +1,14 @@
 """Quiz generator tool adapter."""
 
 async def call_quiz_tool(params: dict):
-    # for demo, generate quiz from topic
+    """
+    Generate quiz questions based on extracted parameters.
+    Creates mock quiz for demo purposes.
+    """
     topic = params["topic"]
     subject = params["subject"]
     num_questions = params.get("num_questions", 5)
+    
     return {
         "topic": topic,
         "subject": subject,

@@ -1,7 +1,6 @@
-"""Parameter extraction using simple JSON parsing."""
+"""Parameter extraction using simple keyword matching."""
 
 from pydantic import BaseModel
-import json
 import re
 
 class QuizParams(BaseModel):
@@ -30,13 +29,32 @@ class ConceptParams(BaseModel):
     difficulty: str = "medium"
 
 def extract_quiz_params(user_text: str) -> QuizParams:
-    """Extract quiz parameters from user text."""
+    """Extract quiz parameters from user text using keyword matching."""
     text_lower = user_text.lower()
     
-    # Simple keyword extraction
-    topic = "derivatives" if "derivative" in text_lower else "algebra"
-    subject = "calculus" if "calculus" in text_lower else "math"
-    difficulty = "beginner" if any(word in text_lower for word in ["struggling", "confused", "help"]) else "medium"
+    # Extract topic based on common subjects
+    if "derivative" in text_lower:
+        topic = "derivatives"
+    elif "algebra" in text_lower:
+        topic = "algebra"
+    else:
+        topic = "derivatives"  # default
+    
+    # Extract subject
+    if "calculus" in text_lower:
+        subject = "calculus"
+    elif "math" in text_lower:
+        subject = "math"
+    else:
+        subject = "calculus"  # default
+    
+    # Determine difficulty from context
+    if any(word in text_lower for word in ["struggling", "confused", "help", "beginner"]):
+        difficulty = "beginner"
+    elif any(word in text_lower for word in ["advanced", "expert"]):
+        difficulty = "advanced"
+    else:
+        difficulty = "medium"
     
     # Extract number of questions
     num_match = re.search(r'(\d+)', user_text)
@@ -53,8 +71,21 @@ def extract_flashcard_params(user_text: str) -> FlashcardParams:
     """Extract flashcard parameters from user text."""
     text_lower = user_text.lower()
     
-    topic = "photosynthesis" if "photosynthesis" in text_lower else "thermodynamics"
-    subject = "biology" if "biology" in text_lower else "physics"
+    # Extract topic
+    if "photosynthesis" in text_lower:
+        topic = "photosynthesis"
+    elif "thermodynamics" in text_lower:
+        topic = "thermodynamics"
+    else:
+        topic = "photosynthesis"  # default
+    
+    # Extract subject
+    if "biology" in text_lower:
+        subject = "biology"
+    elif "physics" in text_lower:
+        subject = "physics"
+    else:
+        subject = "biology"  # default
     
     # Extract count
     count_match = re.search(r'(\d+)', user_text)
@@ -70,9 +101,29 @@ def extract_note_params(user_text: str) -> NoteParams:
     """Extract note parameters from user text."""
     text_lower = user_text.lower()
     
-    topic = "thermodynamics" if "thermodynamics" in text_lower else "photosynthesis"
-    subject = "physics" if "physics" in text_lower else "biology"
-    style = "comprehensive" if "comprehensive" in text_lower else "summary"
+    # Extract topic
+    if "thermodynamics" in text_lower:
+        topic = "thermodynamics"
+    elif "photosynthesis" in text_lower:
+        topic = "photosynthesis"
+    else:
+        topic = "thermodynamics"  # default
+    
+    # Extract subject
+    if "physics" in text_lower:
+        subject = "physics"
+    elif "biology" in text_lower:
+        subject = "biology"
+    else:
+        subject = "physics"  # default
+    
+    # Extract style
+    if "comprehensive" in text_lower:
+        style = "comprehensive"
+    elif "summary" in text_lower:
+        style = "summary"
+    else:
+        style = "comprehensive"  # default
     
     return NoteParams(
         topic=topic,
@@ -84,9 +135,29 @@ def extract_concept_params(user_text: str) -> ConceptParams:
     """Extract concept parameters from user text."""
     text_lower = user_text.lower()
     
-    concept = "quantum mechanics" if "quantum" in text_lower else "photosynthesis"
-    subject = "physics" if "physics" in text_lower else "biology"
-    style = "simple" if "simple" in text_lower else "detailed"
+    # Extract concept
+    if "quantum" in text_lower:
+        concept = "quantum mechanics"
+    elif "photosynthesis" in text_lower:
+        concept = "photosynthesis"
+    else:
+        concept = "quantum mechanics"  # default
+    
+    # Extract subject
+    if "physics" in text_lower:
+        subject = "physics"
+    elif "biology" in text_lower:
+        subject = "biology"
+    else:
+        subject = "physics"  # default
+    
+    # Extract style
+    if "simple" in text_lower:
+        style = "simple"
+    elif "detailed" in text_lower:
+        style = "detailed"
+    else:
+        style = "simple"  # default
     
     return ConceptParams(
         concept=concept,
